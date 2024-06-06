@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "./pkg/pb";
+
+service OrderService {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse) {}
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse) {}
+  rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse) {}
+  rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse) {}
+}
+
+message CreateOrderRequest {
+  int64 productId = 1;
+  int64 quantity = 2;
+  int64 userId = 3;
+}
+
+message CreateOrderResponse {
+  int64 status = 1;
+  string error = 2;
+  int64 id = 3;
+}
+
+message GetOrderRequest {
+  int64 id = 1;
+}
+
+message GetOrderResponse {
+  int64 status = 1;
+  string error = 2;
+  Order order = 3;
+}
+
+message UpdateOrderRequest {
+  int64 id = 1;
+  int64 productId = 2;
+  int64 quantity = 3;
+  int64 userId = 4;
+}
+
+message UpdateOrderResponse {
+  int64 status = 1;
+  string error = 2;
+  Order order = 3;
+}
+
+message DeleteOrderRequest {
+  int64 id = 1;
+}
+
+message DeleteOrderResponse {
+  int64 status = 1;
+  string error = 2;
+  bool success = 3;
+}
+
+message Order {
+  int64 id = 1;
+  int64 productId = 2;
+  int64 quantity = 3;
+  int64 userId = 4;
+  int64 price = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+}
